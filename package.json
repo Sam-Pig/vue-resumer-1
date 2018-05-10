@@ -1,0 +1,20 @@
+{
+  "name": "vue-resumer-1",
+  "version": "1.0.0",
+  "description": "用vue.js实现在线简历生成器",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sam-Pig/vue-resumer-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/Sam-Pig/vue-resumer-1/issues"
+  },
+  "homepage": "https://github.com/Sam-Pig/vue-resumer-1#readme"
+}
