@@ -32,10 +32,9 @@ export default {
   flex-direction: column;
 }
 .topbar {
-  background-color: red;
+  
 }
 main {
-  background-color: blue;
   display: flex;
   flex: 1;
   > .editor {

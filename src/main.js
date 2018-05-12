@@ -19,6 +19,6 @@ Vue.component('Jack', {//全局注册Jack,少用全局的
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  components: { "App": App },//ES6语法，如果key和value是相同的，可以写成components: {App}
+  components: { "App": App },//ES6语法，如果key和value是相同的，可以写成components: { App }
   template: '<App/>'
 })

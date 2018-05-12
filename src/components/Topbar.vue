@@ -1,12 +1,19 @@
 <template>
   <div id="topbar">
-      我是topbar
+      <div class="log">
+          VueResumer
+      </div>
+      <div class="actions">
+          <button>登录</button>
+          <button>注册</button>
+      </div>
   </div>
 </template>
 
-<style>
+<style lang="scss">
     #topbar {
-        border: 1px solid green;
-        min-height: 100px;
+        display: flex;
+        justify-content: space-between;
+        padding: 16px;//约定用8的倍数
     }
 </style>
