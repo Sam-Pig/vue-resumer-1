@@ -10,12 +10,47 @@
           </ol>
       </nav>
       <ol class="panes">
-          <li v-bind:class="{active: currentTab === 0}">tab1</li>
-          <li v-bind:class="{active: currentTab === 1}">tab2</li>
-          <li v-bind:class="{active: currentTab === 2}">tab3</li>
-          <li v-bind:class="{active: currentTab === 3}">tab4</li>
-          <li v-bind:class="{active: currentTab === 4}">tab5</li>
-          <li v-bind:class="{active: currentTab === 5}">tab6</li>
+          <li v-bind:class="{active: currentTab === 0}">
+              <h2>个人信息</h2>
+              <el-form>
+                <el-form-item label="姓名">
+                    <el-input v-model="profile.name"></el-input>
+                </el-form-item>
+                <el-form-item label="户籍">
+                    <el-input v-model="profile.city"></el-input>
+                </el-form-item>
+                <el-form-item label="出生年月">
+                    <el-input v-model="profile.birth"></el-input>
+                </el-form-item>                 
+              </el-form>
+          </li>
+          <li v-bind:class="{active: currentTab === 1}">
+              <h2>工作经历</h2>
+              <el-form>
+                <div class="container" v-for="(work, index) in workHistory">
+                    <i class="el-icon-error" v-on:click="removeWorkHistory(index)"></i>
+                    <el-form-item label="公司">
+                        <el-input v-model="work.company"></el-input>
+                    </el-form-item>
+                    <el-form-item label="工作内容">
+                        <el-input v-model="work.content"></el-input>
+                    </el-form-item>
+                </div>
+                <el-button type="primary" v-on:click="addWorkHistory">添加</el-button>       
+              </el-form>                           
+          </li>
+          <li v-bind:class="{active: currentTab === 2}">
+              <h2>学习经历</h2>
+          </li>
+          <li v-bind:class="{active: currentTab === 3}">
+              <h2>项目经历</h2>
+          </li>
+          <li v-bind:class="{active: currentTab === 4}">
+              <h2>获奖情况</h2>
+          </li>
+          <li v-bind:class="{active: currentTab === 5}">
+              <h2>联系方式</h2>
+          </li>                                        
       </ol>
   </div>
 </template>
@@ -25,8 +60,25 @@
         data(){
             return {
                 currentTab: 0,
-                icons: ['cardid','xiangmu','book','jiangzhang','gongzuotai','phone']
-
+                icons: ['cardid','gongzuotai','book','xiangmu','jiangzhang','phone'],
+                profile: {
+                    name: '',
+                    city: '',
+                    birth: ''
+                },
+                workHistory: [
+                    {company:'',content:''}
+                ]
+            }
+        },
+        methods:{
+            addWorkHistory(){
+                this.workHistory.push({
+                    company:'', content:''
+                })
+            },
+            removeWorkHistory(index){
+                this.workHistory.splice(index,1)
             }
         }
     }
@@ -43,6 +95,7 @@
             > ol > li {
                 padding: 16px 0;
                 text-align: center;
+                cursor: pointer;
                 > .icon {
                     width: 24px;
                     height: 24px;
@@ -56,10 +109,28 @@
                 }
             }
         }
-        .panes > li {
-            display: none;
-            &.active {
-                display: block;
+        .panes {
+            padding: 16px;
+            flex: 1;
+            .container {
+                padding: 16px;
+                box-shadow: 0 0 5px rgba(64,158,255,0.5);
+                position: relative;
+                margin: 8px 0;
+                .el-icon-error {
+                    position: absolute;
+                    right: 8px;
+                    top: 8px;
+                }
+            }
+            > li {
+                display: none;
+                padding: 16px;
+                height: 100%;
+                overflow: auto;
+                &.active {
+                    display: block;
+                }
             }
         }
     }
