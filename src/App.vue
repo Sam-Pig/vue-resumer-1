@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <Topbar/>
-    <Editor/>
-    <Preview/>
+    <Topbar class="topbar"/>
+    <main>
+      <Editor class="editor"/>
+      <Preview class="preview"/>   
+    </main>
   </div>
 </template>
 
@@ -20,13 +22,27 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center;
-  color: #2c3e50;
-  margin-top: 60px; */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  background-color: red;
+}
+main {
+  background-color: blue;
+  display: flex;
+  flex: 1;
+  > .editor {
+    width: 20em;
+  }
+  > .preview {
+    flex: 1;
+  }
 }
 </style>
