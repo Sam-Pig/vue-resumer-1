@@ -11,18 +11,7 @@
       </nav>
       <ol class="panes">
           <li v-bind:class="{active: currentTab === 0}">
-              <h2>个人信息</h2>
-              <el-form>
-                <el-form-item label="姓名">
-                    <el-input v-model="profile.name"></el-input>
-                </el-form-item>
-                <el-form-item label="户籍">
-                    <el-input v-model="profile.city"></el-input>
-                </el-form-item>
-                <el-form-item label="出生年月">
-                    <el-input v-model="profile.birth"></el-input>
-                </el-form-item>                 
-              </el-form>
+              <information v-bind:profile="profile"/>
           </li>
           <li v-bind:class="{active: currentTab === 1}">
               <h2>工作经历</h2>
@@ -56,6 +45,7 @@
 </template>
 
 <script>
+    import information from './information'
     export default {
         data(){
             return {
@@ -130,6 +120,9 @@
                 overflow: auto;
                 &.active {
                     display: block;
+                }
+                > h2 {
+                    margin-bottom: 8px;
                 }
             }
         }
