@@ -11,42 +11,37 @@
       </nav>
       <ol class="panes">
           <li v-bind:class="{active: currentTab === 0}">
-              <information v-bind:profile="profile"/>
+              <ProfileEditor v-bind:profile="profile"/>
           </li>
           <li v-bind:class="{active: currentTab === 1}">
-              <h2>工作经历</h2>
-              <el-form>
-                <div class="container" v-for="(work, index) in workHistory">
-                    <i class="el-icon-error" v-on:click="removeWorkHistory(index)"></i>
-                    <el-form-item label="公司">
-                        <el-input v-model="work.company"></el-input>
-                    </el-form-item>
-                    <el-form-item label="工作内容">
-                        <el-input v-model="work.content"></el-input>
-                    </el-form-item>
-                </div>
-                <el-button type="primary" v-on:click="addWorkHistory">添加</el-button>       
-              </el-form>                           
+              <ArrayEditor v-bind:items="workHistory" v-bind:labels="{company:'单位名称',operatingPost:'工作岗位',content:'工作内容',duration:'在职时间段'}" v-bind:title="'工作经历'"/>
           </li>
           <li v-bind:class="{active: currentTab === 2}">
-              <h2>学习经历</h2>
+              <ArrayEditor v-bind:items="studyHistory" v-bind:labels="{university:'毕业院校', degree:'学位', duration:'在校时间段'}" v-bind:title="'学习经历'"/>
           </li>
           <li v-bind:class="{active: currentTab === 3}">
-              <h2>项目经历</h2>
+              <ArrayEditor v-bind:items="projects" v-bind:labels="{name:'项目名称', content:'项目简介'}" v-bind:title="'项目经历'"/>
           </li>
           <li v-bind:class="{active: currentTab === 4}">
-              <h2>获奖情况</h2>
+              <ArrayEditor v-bind:items="awards" v-bind:labels="{name:'奖项名称', content:'奖项简介'}" v-bind:title="'奖励情况'"/>
           </li>
           <li v-bind:class="{active: currentTab === 5}">
-              <h2>联系方式</h2>
+              <ContactEditor v-bind:contacts="contacts"/>
           </li>                                        
       </ol>
   </div>
 </template>
 
 <script>
-    import information from './information'
+    import ProfileEditor from './ProfileEditor'
+    import ArrayEditor from './ArrayEditor'
+    import ContactEditor from './ContactEditor'
     export default {
+        components: {
+            ProfileEditor,
+            ArrayEditor,
+            ContactEditor
+        },
         data(){
             return {
                 currentTab: 0,
@@ -57,18 +52,20 @@
                     birth: ''
                 },
                 workHistory: [
-                    {company:'',content:''}
-                ]
-            }
-        },
-        methods:{
-            addWorkHistory(){
-                this.workHistory.push({
-                    company:'', content:''
-                })
-            },
-            removeWorkHistory(index){
-                this.workHistory.splice(index,1)
+                    {company:'', operatingPost:'', content:'', duration:''}
+                ],
+                studyHistory: [
+                    {university:'', degree:'', duration:''}
+                ],
+                projects: [
+                    {name:'', content:''}
+                ],
+                awards: [
+                    {name:'', content:''}
+                ],
+                contacts: {
+                    phone:'', qq:'', wechat:'', email:''
+                }
             }
         }
     }
@@ -105,12 +102,14 @@
             .container {
                 padding: 16px;
                 box-shadow: 0 0 5px rgba(64,158,255,0.5);
+                border-radius: 4px;
                 position: relative;
                 margin: 8px 0;
                 .el-icon-error {
                     position: absolute;
                     right: 8px;
                     top: 8px;
+                    cursor: pointer;
                 }
             }
             > li {

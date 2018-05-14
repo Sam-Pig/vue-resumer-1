@@ -1,7 +1,7 @@
 <template>
   <div id="topbar">
       <div class="log">
-          VueResumer
+          Vue Resume-Maker
       </div>
       <div class="actions">
           <el-button>注册</el-button>
